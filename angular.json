@@ -23,12 +23,18 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/favicon.ico",
+              "src/assets/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "../node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "../node_modules/bootstrap/scss"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
@@ -76,11 +82,12 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "src/styles.scss"
+              "../node_modules/bootstrap/dist/css/bootstrap.css",
+              "src/styles/styles.scss"
             ],
             "scripts": [],
             "assets": [
-              "src/favicon.ico",
+              "src/assets/favicon.ico",
               "src/assets"
             ]
           }
