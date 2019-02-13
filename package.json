@@ -17,6 +17,7 @@
     "@angular/core": "^6.0.3",
     "@angular/forms": "^6.0.3",
     "@angular/http": "^6.0.3",
+    "@angular/material": "^7.3.2",
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
@@ -26,8 +27,8 @@
     "core-js": "^2.5.4",
     "npm": "^6.7.0",
     "parsejson": "0.0.3",
-    "rxjs": "^6.4.0",
-    "rxjs-compat": "^6.4.0",
+    "rxjs": "6.0.0",
+    "rxjs-compat": "6.0.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
