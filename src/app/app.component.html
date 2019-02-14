@@ -1,3 +1,12 @@
-<header> Aqui ira el componente de barra de inicio </header>
-<router-outlet></router-outlet>
-<footer> Aqui ira el componente de barra de fin </footer>
+<app-header></app-header>
+<main class="d-flex">
+  <div>
+    <app-dashboard></app-dashboard>
+  </div>
+  <div class="h-100 w-100">
+    <router-outlet>
+      <!-- Aqui se renderizan los componentes del routing-module -->
+    </router-outlet>
+  </div>
+</main>
+<app-footer></app-footer>

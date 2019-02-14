@@ -6,10 +6,35 @@ body {
 }
 
 header {
-    height: 10%;
-    background-color:aliceblue; 
+    height: 5vh;
 }
+
 footer {
-    height: 10%; 
-    background-color:aquamarine; 
+    bottom: 0; 
+    background-color:black;
+    color: greenyellow;
+    font-size: 90%;
+    line-height: 100%;
+    vertical-align: center;
+    p {
+        margin: 0 0.1rem;
+    } 
+
+}
+
+main {
+    height: 85vh;
+    width: 100%;
+}
+
+.espacio- {
+    &inferior{
+        height: 7vh;
+    }
+    &superior{
+        height: 7vh;
+    }
+    &central{
+        height: (100-14)vh;
+    }
 }

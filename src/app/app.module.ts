@@ -1,10 +1,11 @@
+import { SharedModule } from './shared/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatPaginatorModule, MatDialogModule } from '@angular/material';
+// import { MatPaginatorModule, MatDialogModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,13 @@ import { MatPaginatorModule, MatDialogModule } from '@angular/material';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
-    MatDialogModule,
+    SharedModule,
+   // MatPaginatorModule,
+   // MatDialogModule,
     BrowserAnimationsModule,
   ],
-  exports: [ AppRoutingModule ],
-  providers: [],
-  bootstrap: [AppComponent]
+  exports: [ ],
+  providers: [ ],
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }
