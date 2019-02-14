@@ -6,6 +6,8 @@ import { HomeComponent } from './home/home.component';
   imports: [
     CommonModule
   ],
-  declarations: [HomeComponent]
+  declarations: [
+    HomeComponent
+  ]
 })
 export class HomeModule { }

@@ -1,5 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family:'Source Sans Pro', sans-serif; 
+}
+
+header {
+    height: 10%;
+    background-color:aliceblue; 
+}
+footer {
+    height: 10%; 
+    background-color:aquamarine; 
 }
