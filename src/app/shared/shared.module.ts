@@ -1,3 +1,5 @@
+import { AppRoutingModule } from './../app-routing.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
@@ -6,7 +8,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    FontAwesomeModule,
+    AppRoutingModule
   ],
   declarations: [FooterComponent, HeaderComponent, DashboardComponent],
   exports: [FooterComponent, HeaderComponent, DashboardComponent]
