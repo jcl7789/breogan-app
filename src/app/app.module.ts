@@ -1,9 +1,14 @@
-// App modules
 import { AppComponent } from './app.component';
-import { HomeModule } from './home/home.module';
-import { StockModule } from './stock/stock.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
+
+// App modules
+import { HomeModule } from './home/home.module';
+import { StockModule } from './stock/stock.module';
+import { SalesModule } from './sales/sales.module';
+import { ScheduleModule } from './schedule/schedule.module';
+import { StatsModule } from './stats/stats.module';
+import { ProfileModule } from './profile/profile.module';
 
 // Angular modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -34,14 +39,17 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
     BrowserAnimationsModule,
     FontAwesomeModule,
     HomeModule,
-    StockModule
+    StockModule,
+    SalesModule,
+    ScheduleModule,
+    StatsModule,
+    ProfileModule
   ],
-  exports: [ ],
-  providers: [ ],
-  bootstrap: [ AppComponent ]
+  exports: [],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
-
 
 library.add(fas, far, fab);
 

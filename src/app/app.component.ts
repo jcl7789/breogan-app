@@ -8,5 +8,5 @@ import { Component } from '@angular/core';
 export class AppComponent {
   titulo = 'Breogan - App';
   fecha = new Date();
-  tocoHamburguesa = true;
+  showDashboard = true;
 }
