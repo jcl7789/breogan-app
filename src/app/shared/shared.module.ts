@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @NgModule({
   imports: [
@@ -12,8 +11,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     FontAwesomeModule,
     AppRoutingModule
   ],
-  declarations: [FooterComponent, HeaderComponent, DashboardComponent],
-  exports: [FooterComponent, HeaderComponent, DashboardComponent]
+  declarations: [FooterComponent, HeaderComponent],
+  exports: [FooterComponent, HeaderComponent]
 })
 export class SharedModule { }
 

@@ -1,5 +1,10 @@
 footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  background-color: black;
+  color: greenyellow;
+  font-size: 0.9em;
+  line-height: 0.8em;
+
+  p {
+    text-align: center;
+  }
 }

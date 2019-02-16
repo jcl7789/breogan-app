@@ -3,28 +3,7 @@
 
 body {
     font-family:'Source Sans Pro', sans-serif; 
-}
-
-header {
-    height: 5vh;
-}
-
-footer {
-    bottom: 0; 
-    background-color:black;
-    color: greenyellow;
-    font-size: 90%;
-    line-height: 100%;
-    vertical-align: center;
-    p {
-        margin: 0 0.1rem;
-    } 
-
-}
-
-main {
-    height: 85vh;
-    width: 100%;
+    width: 100vw;
 }
 
 .espacio- {
@@ -32,9 +11,9 @@ main {
         height: 7vh;
     }
     &superior{
-        height: 7vh;
+        height: 8vh;
     }
     &central{
-        height: (100-14)vh;
+        height: 85vh;
     }
 }
