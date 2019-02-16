@@ -4,16 +4,18 @@
 body {
     font-family:'Source Sans Pro', sans-serif; 
     width: 100vw;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 
 .espacio- {
     &inferior{
-        height: 7vh;
+        height: 6vh;
     }
     &superior{
         height: 8vh;
     }
     &central{
-        height: 85vh;
+        height: 86vh;
     }
 }
