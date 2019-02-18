@@ -1,6 +1,6 @@
 <header class="espacio-superior">
   <nav class="navbar navbar-expand-lg navbar-dark bg-success d-flex w-100 h-100">
-    <a class="navbar-brand mr-4">
+    <a class="navbar-brand mr-4" routerLink="" routerLinkActive="active">
       <fa-icon [icon]="['fas','paw']" class="mr-2 icon-green"></fa-icon>
       <span class="marca">BREOGAN</span>
     </a>
@@ -10,10 +10,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="" routerLinkActive="active">
-          <fa-icon [icon]="['fas','home']" class="mr-1"></fa-icon>
-          <span>Inicio</span>
-        </a>
         <a class="nav-item nav-link" routerLink="sales" routerLinkActive="active">
           <fa-icon [icon]="['fas','money-bill']" class="mr-1"></fa-icon>
           <span>Ventas</span>
@@ -21,7 +17,7 @@
         <a class="nav-item nav-link" routerLink="stock" routerLinkActive="active">
           <fa-icon [icon]="['fas','boxes']" class="mr-1"></fa-icon>
           <span>Stock</span>
-        </a>
+        </a> 
         <a class="nav-item nav-link" routerLink="schedule" routerLinkActive="active">
           <fa-icon [icon]="['fas','cut']" class="mr-1"></fa-icon>
           <span>Peluqueria</span>
@@ -30,7 +26,7 @@
           <fa-icon [icon]="['fas','chalkboard']" class="mr-1"></fa-icon>
           <span>Estadisticas</span>
         </a>
-        <a class="nav-item nav-link fixed-right" routerLink="profile" routerLinkActive="active">
+        <a class="nav-item nav-link mr-4 fixed-right" routerLink="profile" routerLinkActive="active">
           <fa-icon [icon]="['fas','sign-in-alt']" class="mr-1"></fa-icon>
           <span class="right">Login</span>
         </a>
