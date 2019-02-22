@@ -7,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
+  isLogged = false;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  logIn(){
+    this.isLogged = !this.isLogged;
+  }
 }

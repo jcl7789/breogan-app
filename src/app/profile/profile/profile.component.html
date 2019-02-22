@@ -1,3 +1,8 @@
-<p>
-  profile works!
-</p>
+<section class="h-100 col-6">
+  <app-profile-login *ngIf="isLogged"></app-profile-login>
+  <app-profile-management *ngIf="!isLogged"></app-profile-management>
+</section>
+<section class="col-6">
+  <app-profile-actions></app-profile-actions>
+</section>
+<button (click)="logIn()"></button>
