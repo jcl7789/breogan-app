@@ -1,5 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
 body {
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family:'Source Sans Pro', sans-serif; 
+    width: 100vw;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.espacio- {
+    &inferior{
+        height: 6vh;
+    }
+    &superior{
+        height: 8vh;
+    }
+    &central{
+        height: 86vh;
+    }
 }

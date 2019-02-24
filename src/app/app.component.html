@@ -1,3 +1,9 @@
-<h1>{{ titulo }}</h1>
-<p>{{ fecha | date:'dd-MM-yyyy' }}</p>
-<router-outlet></router-outlet>
+<app-header></app-header>
+<main class="d-flex espacio-central">
+  <div class="h-100 w-100 overflow-hidden">
+    <router-outlet>
+      <!-- Aqui se renderizan los componentes del routing-module -->
+    </router-outlet>
+  </div>
+</main>
+<app-footer></app-footer>

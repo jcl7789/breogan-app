@@ -23,11 +23,10 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
             "assets": [
-              "src/assets/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "./node_modules/bootstrap/dist/css/bootstrap.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
@@ -87,7 +86,6 @@
             ],
             "scripts": [],
             "assets": [
-              "src/assets/favicon.ico",
               "src/assets"
             ]
           }

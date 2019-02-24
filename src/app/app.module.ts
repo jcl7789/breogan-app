@@ -1,11 +1,29 @@
+import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
+
+// App modules
+import { HomeModule } from './home/home.module';
+import { StockModule } from './stock/stock.module';
+import { SalesModule } from './sales/sales.module';
+import { ScheduleModule } from './schedule/schedule.module';
+import { StatsModule } from './stats/stats.module';
+import { ProfileModule } from './profile/profile.module';
+
+// Angular modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MatPaginatorModule, MatDialogModule } from '@angular/material';
+import { MatPaginatorModule, MatDialogModule, MatTableModule, MatSelectModule, MatFormFieldModule, MatSortModule } from '@angular/material';
+
+// iconos
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 @NgModule({
   declarations: [
@@ -16,14 +34,28 @@ import { MatPaginatorModule, MatDialogModule } from '@angular/material';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule,
+    SharedModule,
     MatPaginatorModule,
     MatDialogModule,
     BrowserAnimationsModule,
-    HttpClient
+    FontAwesomeModule,
+    HomeModule,
+    StockModule,
+    SalesModule,
+    ScheduleModule,
+    StatsModule,
+    ProfileModule,
+    MatTableModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSortModule
   ],
-  exports: [ AppRoutingModule ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+library.add(fas, far, fab);
+
+platformBrowserDynamic().bootstrapModule(AppModule);
