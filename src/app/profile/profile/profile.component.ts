@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -9,12 +10,16 @@ export class ProfileComponent implements OnInit {
 
   isLogged = false;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit() {
+    this.isLogged = this.auth.isAuthenticated();
+    // this.isLogged = true;
   }
 
-  logIn(){
-    this.isLogged = !this.isLogged;
+  logIn() {
+    console.log('Inicio de sesion');
+    this.auth.login();
   }
+
 }

@@ -24,6 +24,12 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { RoleGuardService } from './services/role-guard.service';
+import { JwtModule } from '@auth0/angular-jwt';
+
+export function tokenGetter() { return localStorage.getItem('access_token'); }
 
 @NgModule({
   declarations: [
@@ -48,10 +54,15 @@ import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
     MatTableModule,
     MatSelectModule,
     MatFormFieldModule,
-    MatSortModule
+    MatSortModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter
+      }
+    })
   ],
   exports: [],
-  providers: [],
+  providers: [ AuthGuardService, AuthService, RoleGuardService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -27,8 +27,14 @@
           <span>Estadisticas</span>
         </a>
         <a class="nav-item nav-link mr-4 fixed-right" routerLink="profile" routerLinkActive="active">
+          <div *ngIf="!isLogged">
           <fa-icon [icon]="['fas','sign-in-alt']" class="mr-1"></fa-icon>
           <span class="right">Login</span>
+        </div>
+        <div *ngIf="isLogged">
+            <fa-icon [icon]="['fas','user']" class="mr-1"></fa-icon>
+            <span class="right">Perfil</span>
+        </div>
         </a>
       </div>
     </div>

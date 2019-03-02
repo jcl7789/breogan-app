@@ -1,8 +1,10 @@
-<section class="h-100 col-6">
-  <app-profile-login *ngIf="isLogged"></app-profile-login>
-  <app-profile-management *ngIf="!isLogged"></app-profile-management>
-</section>
-<section class="col-6">
-  <app-profile-actions></app-profile-actions>
-</section>
-<button (click)="logIn()"></button>
+<div class="d-flex">
+  <button (click)="logIn()" class="btn btn-dark"></button>
+  <section class="h-100 w-50">
+    <app-profile-login *ngIf="!isLogged"></app-profile-login>
+    <app-profile-management *ngIf="isLogged"></app-profile-management>
+  </section>
+  <section class="w-50">
+    <app-profile-actions *ngIf="isLogged"></app-profile-actions>
+  </section>
+</div>

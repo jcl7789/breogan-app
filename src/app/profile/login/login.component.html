@@ -1,3 +1,21 @@
-<p>
-  login works!
-</p>
+<div class="wrapper">
+  <div id="formContent">
+    <form class="form-signin">
+      <div class="text-center mb-4">
+        <img src="../../../assets/img/logo.jpg" alt="" width="80%"  height="80%">
+      </div>
+
+      <div class="form-label-group">
+        <input type="text" id="user" class="form-control" placeholder="Usuario" required autofocus autocomplete="username">
+        <label for="user">Usuario</label>
+      </div>
+
+      <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required autocomplete="current-password">
+        <label for="inputPassword">Password</label>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" (click)="doLogin()">Iniciar sesion</button>
+    </form>
+  </div>
+</div>
