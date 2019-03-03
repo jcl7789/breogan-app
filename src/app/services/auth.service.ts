@@ -13,9 +13,11 @@ export class AuthService {
     return this.logged;
   }
 
-  public login(): void {
+  public async login() {
+    console.log('Comunicandose con el servidor');
+    console.log('Respuesta recibida. ---> : (200) LOGIN EXITOSO');
     this.logged = !this.logged;
-    this.router.navigate([ '/' ]);
+    this.router.navigate(['/']);
   }
 
 }

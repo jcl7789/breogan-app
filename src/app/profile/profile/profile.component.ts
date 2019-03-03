@@ -16,10 +16,4 @@ export class ProfileComponent implements OnInit {
     this.isLogged = this.auth.isAuthenticated();
     // this.isLogged = true;
   }
-
-  logIn() {
-    console.log('Inicio de sesion');
-    this.auth.login();
-  }
-
 }

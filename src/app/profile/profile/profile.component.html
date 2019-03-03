@@ -1,10 +1,13 @@
-<div class="d-flex">
-  <button (click)="logIn()" class="btn btn-dark"></button>
-  <section class="h-100 w-50">
+<div class="h-100">
+  <div [ngClass]="{'w-100': !isLogged}">
     <app-profile-login *ngIf="!isLogged"></app-profile-login>
-    <app-profile-management *ngIf="isLogged"></app-profile-management>
-  </section>
-  <section class="w-50">
-    <app-profile-actions *ngIf="isLogged"></app-profile-actions>
-  </section>
+  </div>
+  <div [ngClass]="{'w-100': isLogged}" class="d-flex">
+    <div class="w-50">
+      <app-profile-management *ngIf="isLogged"></app-profile-management>
+    </div>
+    <div class="w-50">
+      <app-profile-actions *ngIf="isLogged"></app-profile-actions>
+    </div>
+  </div>
 </div>
