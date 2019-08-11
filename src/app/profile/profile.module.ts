@@ -6,11 +6,15 @@ import { LoginComponent } from './login/login.component';
 import { ManagementComponent } from './management/management.component';
 import { ActionsComponent } from './actions/actions.component';
 import { SignupComponent } from './signup/signup.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatProgressSpinnerModule,
+    FormsModule
   ],
   declarations: [ProfileComponent, LoginComponent, ManagementComponent, ActionsComponent, SignupComponent]
 })

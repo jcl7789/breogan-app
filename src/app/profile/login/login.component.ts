@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-profile-login',
@@ -7,10 +8,13 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  isLoading = false;
 
   constructor(private auth: AuthService) { }
 
-  doLogin() {
-    this.auth.login();
+  doLogin(form: NgForm) {
+    const email = form.value.get('email');
+    const password = form.value.get('password');
+    this.auth.login(email, password);
   }
 }

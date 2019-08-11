@@ -21,6 +21,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // iconos
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -60,6 +61,7 @@ export function tokenGetter() { return localStorage.getItem('access_token'); }
     MatSelectModule,
     MatFormFieldModule,
     MatSortModule,
+    MatProgressSpinnerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter

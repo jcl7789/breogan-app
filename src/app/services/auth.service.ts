@@ -21,14 +21,18 @@ export class AuthService {
     const authData: AuthData = { email: email, password: password };
     this.http
       .post('http://localhost:3000/users/signup', authData)
-      .subscribe(response => {
+      .subscribe((response: any) => {
         console.log(response);
       });
   }
 
-  public async login() {
-    console.log('Comunicandose con el servidor');
-    console.log('Respuesta recibida. ---> : (200) LOGIN EXITOSO');
+  public async login(email: string, password: string) {
+    const authData: AuthData = { email: email, password: password };
+    this.http
+      .post('http://localhost:3000/users/login', authData)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
     this.logged = !this.logged;
     this.router.navigate(['/']);
   }
