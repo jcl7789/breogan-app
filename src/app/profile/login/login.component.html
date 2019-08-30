@@ -1,18 +1,19 @@
 <div class="wrapper">
   <mat-spinner *ngIf="isLoading"></mat-spinner>
   <div id="formContent" *ngIf="!isLoading">
-    <form class="form-signin" (submit)="doLogin(loginForm)" #loginForm>
+    <form (ngSubmit)="doLogin()" [formGroup]="loginForm">
       <div class="text-center mb-4">
         <img src="../../../assets/img/logo.jpg" alt="" width="80%"  height="80%">
       </div>
       <div class="form-label-group">
-        <input type="email" ngModel id="user" class="form-control" placeholder="E-mail" required autofocus autocomplete="username" #emailInput="ngModel">
+        <input type="email" formControlName="email" class="form-control" placeholder="E-mail" required autofocus autocomplete="username">
         <p></p>
       </div>
       <div class="form-label-group">
-        <input type="password" ngModel id="inputPassword" class="form-control" placeholder=" " required autocomplete="current-password" #passwordInput="ngModel">
+        <input type="password"  formControlName="password" class="form-control" placeholder=" " required autocomplete="current-password">
       </div>
       <button class="btn btn-lg btn-primary btn-block">Iniciar sesion</button>
+      <a [routerLink]="['/register']" class="btn btn-link">Register</a>
     </form>
   </div>
 </div>

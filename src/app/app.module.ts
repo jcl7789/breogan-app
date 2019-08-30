@@ -34,6 +34,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { RoleGuardService } from './services/role-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
 
 export function tokenGetter() { return localStorage.getItem('access_token'); }
 
@@ -42,6 +43,7 @@ export function tokenGetter() { return localStorage.getItem('access_token'); }
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

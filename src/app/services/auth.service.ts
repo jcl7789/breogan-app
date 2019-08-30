@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthData } from '../shared/models/auth-data.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root' // <- ADD THIS
 })
 export class AuthService {
   private logged: boolean;
@@ -22,7 +22,7 @@ export class AuthService {
     this.http
       .post('http://localhost:3000/users/signup', authData)
       .subscribe((response: any) => {
-        console.log(response);
+        this.router.navigate(['/']);
       });
   }
 
@@ -31,9 +31,11 @@ export class AuthService {
     this.http
       .post('http://localhost:3000/users/login', authData)
       .subscribe((response: any) => {
-        console.log(response);
+        const token = response.token;
+        if (token) {
+          this.logged = true;
+        }
+        this.router.navigate(['/']);
       });
-    this.logged = !this.logged;
-    this.router.navigate(['/']);
   }
 }
