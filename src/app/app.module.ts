@@ -36,6 +36,7 @@ import { RoleGuardService } from './services/role-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthInterceptor } from './services/auth-interceptor';
+import { AuthModule } from './auth/auth.module';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -54,6 +55,7 @@ export function tokenGetter() {
     MatDialogModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    AuthModule,
     HomeModule,
     StockModule,
     SalesModule,

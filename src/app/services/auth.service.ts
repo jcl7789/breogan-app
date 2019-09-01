@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from '../shared/models/auth-data.model';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { stringify } from 'querystring';
 import { getLocaleExtraDayPeriodRules } from '@angular/common';
 
@@ -29,11 +29,10 @@ export class AuthService {
     return this.logged;
   }
 
-  public getAuthSatusListener() {
+  public getAuthSatusListener(): Observable<boolean> {
     return this.authStatusListener.asObservable();
   }
-  public createUser(email: string, password: string) {
-    const authData: AuthData = { email: email, password: password };
+  public createUser(authData: AuthData) {
     this.http
       .post(this.HOST_URL + '/users/signup', authData)
       .subscribe((response: any) => {

@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProfileComponent } from './profile/profile.component';
-import { AppRoutingModule } from './../app-routing.module';
-import { ManagementComponent } from './management/management.component';
-import { ActionsComponent } from './actions/actions.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import { AppRoutingModule } from '../app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -15,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [ProfileComponent, ManagementComponent, ActionsComponent]
+  declarations: [
+    LoginComponent,
+    SignupComponent
+  ]
 })
-export class ProfileModule { }
+export class AuthModule { }

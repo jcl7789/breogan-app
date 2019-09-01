@@ -9,39 +9,59 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="sales" routerLinkActive="active">
-          <fa-icon [icon]="['fas','money-bill']" class="mr-1"></fa-icon>
-          <span>Ventas</span>
-        </a>
-        <a class="nav-item nav-link" routerLink="stock" routerLinkActive="active">
-          <fa-icon [icon]="['fas','boxes']" class="mr-1"></fa-icon>
-          <span>Stock</span>
-        </a>
-        <a class="nav-item nav-link" routerLink="schedule" routerLinkActive="active">
-          <fa-icon [icon]="['fas','cut']" class="mr-1"></fa-icon>
-          <span>Peluqueria</span>
-        </a>
-        <a class="nav-item nav-link" routerLink="stats" routerLinkActive="active">
-          <fa-icon [icon]="['fas','chalkboard']" class="mr-1"></fa-icon>
-          <span>Estadisticas</span>
-        </a>
-        <a class="nav-item nav-link mr-4 fixed-right" routerLink="profile" routerLinkActive="active">
-          <div *ngIf="isLogged">
-            <fa-icon [icon]="['fas','sign-in-alt']" class="mr-1"></fa-icon>
-            <span class="right">Login</span>
-          </div>
-          <div *ngIf="!isLogged">
-            <fa-icon [icon]="['fas','user']" class="mr-1"></fa-icon>
-            <span class="right">Perfil</span>
-          </div>
-        </a>
-        <div *ngIf="isLogged">
-          <a class="nav-item nav-link mr-4 fixed-right" (click)="doLogout()">
-            <fa-icon [icon]="['fas','fa-sign-out']" class="mr-1"></fa-icon>
-            <span class="right">Salir</span>
-          </a>
-        </div>
+      <div class="w-100">
+        <ul *ngIf="isLogged" class="navbar-nav mr-auto">
+          <li class="mr-4 float-right">
+            <a class="nav-link" routerLink="sales" routerLinkActive="active">
+              <fa-icon [icon]="['fas','money-bill']" class="mr-1"></fa-icon>
+              <span>Ventas</span>
+            </a>
+          </li>
+          <li class="nav-item mr-4 float-right">
+            <a class="nav-link" routerLink="stock" routerLinkActive="active">
+              <fa-icon [icon]="['fas','boxes']" class="mr-1"></fa-icon>
+              <span>Stock</span>
+            </a>
+          </li>
+          <li class="nav-item mr-4 float-right">
+            <a class="nav-link" routerLink="schedule" routerLinkActive="active">
+              <fa-icon [icon]="['fas','cut']" class="mr-1"></fa-icon>
+              <span>Peluqueria</span>
+            </a>
+          </li>
+          <li class="nav-item mr-4 float-right">
+            <a class="nav-link" routerLink="stats" routerLinkActive="active">
+              <fa-icon [icon]="['fas','chalkboard']" class="mr-1"></fa-icon>
+              <span>Estadisticas</span>
+            </a>
+          </li>
+          <li class="nav-item mr-4 float-right">
+            <a class="nav-link" routerLink="profile" routerLinkActive="active">
+              <fa-icon [icon]="['fas','user']" class="mr-1"></fa-icon>
+              <span class="right">Perfil</span>
+            </a>
+          </li>
+          <li class="nav-item mr-4 ml-auto">
+            <a  class="nav-link" (click)="doLogout()">
+              <fa-icon [icon]="['fas','sign-out-alt']" class="mr-1"></fa-icon>
+              <span class="right">Salir</span>
+            </a>
+          </li>
+        </ul>
+        <ul *ngIf="!isLogged" class="navbar-nav mr-auto">
+          <li class="nav-item mr-4 ml-auto">
+              <a class="nav-link" routerLink="login" routerLinkActive="active">
+                  <fa-icon [icon]="['fas','sign-in-alt']" class="mr-1"></fa-icon>
+                  <span class="right">Iniciar sesion</span>
+                </a>
+          </li>
+          <li class="nav-item mr-4 float-right">
+              <a class="nav-link" routerLink="signup" routerLinkActive="active">
+                  <fa-icon [icon]="['fas','user-plus']" class="mr-1"></fa-icon>
+                  <span class="right">Registrarse</span>
+                </a>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>

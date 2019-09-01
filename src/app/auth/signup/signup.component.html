@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div id="formContent" *ngIf="!isLoading">
+      <form (ngSubmit)="doSignup()" [formGroup]="signupForm">
+        <div class="text-center mb-4">
+          <img src="../../../assets/img/logo.jpg" alt="" width="80%"  height="80%">
+        </div>
+        <div class="form-label-group">
+          <input type="email" formControlName="email" class="form-control" placeholder="E-mail" required autofocus autocomplete="username">
+          <p *ngIf="false"><small class="text-danger">Verificá tu email</small></p>
+        </div>
+        <div class="form-label-group">
+          <input type="password"  formControlName="password" class="form-control" placeholder=" " required autocomplete="current-password">
+          <p *ngIf="false"><small class="text-danger">Contraseña inválida</small></p>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block">Iniciar sesion</button>
+        <a [routerLink]="['/login']" class="btn btn-link">¡Ya soy usuario!</a>
+      </form>
+    </div>
+  </div>
