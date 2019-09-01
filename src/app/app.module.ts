@@ -35,6 +35,7 @@ import { AuthService } from './services/auth.service';
 import { RoleGuardService } from './services/role-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth-interceptor';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -85,7 +86,7 @@ export function tokenGetter() {
     MatSortModule,
     MatProgressSpinnerModule
   ],
-  providers: [AuthGuardService, AuthService, RoleGuardService],
+  providers: [AuthGuardService, AuthService, RoleGuardService, AuthInterceptor],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
