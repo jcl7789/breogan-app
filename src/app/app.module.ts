@@ -36,12 +36,12 @@ import { RoleGuardService } from './services/role-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule } from '@angular/common/http';
 
-export function tokenGetter() { return localStorage.getItem('access_token'); }
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
@@ -71,11 +71,24 @@ export function tokenGetter() { return localStorage.getItem('access_token'); }
     })
   ],
   entryComponents: [],
-  exports: [],
-  providers: [ AuthGuardService, AuthService, RoleGuardService ],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    MatTableModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSortModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [AuthGuardService, AuthService, RoleGuardService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
 
 library.add(fas, far, fab);
 

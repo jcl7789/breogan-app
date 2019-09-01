@@ -9,6 +9,8 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   isLoading = false;
+  invalidEmail = false;
+  invalidPass = false;
   loginForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) {}
@@ -24,10 +26,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    console.log(this.loginForm);
-    const email = this.loginForm.get('email').value;
-    const password = this.loginForm.get('password').value;
-    console.log(email, password);
-    this.auth.login(email, password);
+    const email = this.loginForm.get('email');
+    const password = this.loginForm.get('password');
+    this.invalidEmail = email.invalid;
+    this.invalidPass = email.invalid;
+    this.auth.login(email.value, password.value);
   }
 }

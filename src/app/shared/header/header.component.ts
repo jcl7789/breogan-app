@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit, OnChanges {
-  private isLogged: boolean;
+  public isLogged: boolean;
 
   constructor(private auth: AuthService) { }
 
