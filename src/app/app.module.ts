@@ -15,7 +15,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatPaginatorModule, MatDialogModule, MatTableModule, MatSelectModule, MatFormFieldModule, MatSortModule } from '@angular/material';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSortModule } from '@angular/material/sort';
+import { MatTableModule } from '@angular/material/table';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 // iconos
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -28,14 +34,18 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthService } from './services/auth.service';
 import { RoleGuardService } from './services/role-guard.service';
 import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
+import { AuthInterceptor } from './services/auth-interceptor';
+import { AuthModule } from './auth/auth.module';
 
-export function tokenGetter() { return localStorage.getItem('access_token'); }
+export function tokenGetter() {
+  return localStorage.getItem('access_token');
+}
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent],
   imports: [
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -45,6 +55,7 @@ export function tokenGetter() { return localStorage.getItem('access_token'); }
     MatDialogModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
+    AuthModule,
     HomeModule,
     StockModule,
     SalesModule,
@@ -55,6 +66,7 @@ export function tokenGetter() { return localStorage.getItem('access_token'); }
     MatSelectModule,
     MatFormFieldModule,
     MatSortModule,
+    MatProgressSpinnerModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
@@ -62,11 +74,24 @@ export function tokenGetter() { return localStorage.getItem('access_token'); }
     })
   ],
   entryComponents: [],
-  exports: [],
-  providers: [ AuthGuardService, AuthService, RoleGuardService ],
+  exports: [
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    MatPaginatorModule,
+    MatDialogModule,
+    BrowserAnimationsModule,
+    FontAwesomeModule,
+    MatTableModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatSortModule,
+    MatProgressSpinnerModule
+  ],
+  providers: [AuthGuardService, AuthService, RoleGuardService, AuthInterceptor],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
 
 library.add(fas, far, fab);
 

@@ -1,3 +1,8 @@
+mat-spinner {
+  margin: auto;
+}
+
+
 /* STRUCTURE */
 
 .wrapper {
@@ -10,7 +15,7 @@
     padding: 20px;
     margin: auto;
   }
-  
+
   #formContent {
     -webkit-border-radius: 10px 10px 10px 10px;
     border-radius: 10px 10px 10px 10px;
@@ -22,7 +27,7 @@
     padding: 1em;
     text-align: center;
   }
-  
+
   /* FLOATING LABELS */
 
   .form-signin {
@@ -31,7 +36,7 @@
     padding: 15px;
     margin: 0 auto;
   }
-  
+
   .form-label-group {
     position: relative;
     margin-bottom: 1rem;
