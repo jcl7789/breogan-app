@@ -3,23 +3,26 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { AuthData } from '../shared/models/auth-data.model';
 import { Subject, Observable } from 'rxjs';
-import { stringify } from 'querystring';
-import { getLocaleExtraDayPeriodRules } from '@angular/common';
+import { AppConfigService } from './app-config.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private HOST_URL = 'http://localhost:3000'; // se debe cargar por ambiente
+  private HOST_URL: string;
 
   private logged: boolean;
   private token: string;
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
 
-
-  constructor(private router: Router, private http: HttpClient) {
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private config: AppConfigService
+  ) {
     this.logged = false;
+    this.HOST_URL = this.config.endpoint;
   }
 
   public getToken() {
@@ -42,14 +45,20 @@ export class AuthService {
 
   public async login(authData: AuthData) {
     this.http
-      .post<{token: string, expiresIn: number}>(this.HOST_URL + '/users/login', authData)
+      .post<{ token: string; expiresIn: number }>(
+        this.HOST_URL + '/users/login',
+        authData
+      )
       .subscribe((response: any) => {
         const token = response.token;
         this.token = token;
         if (token) {
           const expiresInDuration = response.expiresIn;
           this.setAuthTimer(expiresInDuration);
-          this.saveAuthData(token, this.calculateExpirationDate(expiresInDuration));
+          this.saveAuthData(
+            token,
+            this.calculateExpirationDate(expiresInDuration)
+          );
           this.setStatus(true);
           this.router.navigate(['/']);
         }
@@ -102,7 +111,6 @@ export class AuthService {
       this.setStatus(true);
       this.setAuthTimer(expiraEn / 1000);
     }
-
   }
 
   private getAuthData() {
