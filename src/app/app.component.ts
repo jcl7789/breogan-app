@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { AppConfigService } from './services/app-config.service';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +12,10 @@ export class AppComponent implements OnInit {
   fecha = new Date();
   showDashboard = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private appConfig: AppConfigService) {}
 
   ngOnInit(): void {
+    this.appConfig.load();
     this.authService.autoAuthUser();
   }
 }

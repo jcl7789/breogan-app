@@ -1,22 +1,48 @@
-import { Injectable } from '@angular/core';
+import { Injectable, APP_INITIALIZER } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppConfigService {
-  public endpoint: string;
+  private endpoint: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.load();
+  }
 
-  load(): Promise<any> {
-    const promise = this.http
-      .get('./app-config.json')
+  load(): string {
+    this.http
+      .get<ConfigClass>('./assets/app-config.json')
       .toPromise()
       .then(data => {
-        Object.assign(this, data);
-        return data;
+        this.endpoint = data.endpoint;
+      }).catch((error) => {
+        this.endpoint = 'http://localhost:3000';
       });
-    return promise;
+      return this.endpoint;
   }
 }
+
+class ConfigClass {
+  endpoint: string;
+}
+
+export function init() {
+  return {
+    provide: APP_INITIALIZER,
+    useFactory: servicesOnRun,
+    multi: true,
+    deps: [AppConfigService]
+  }
+}
+
+export function servicesOnRun(config: AppConfigService, token: null) {
+  return () => config.load();
+}
+
+const AppConfigModule = {
+  init: init
+}
+
+export { AppConfigModule };

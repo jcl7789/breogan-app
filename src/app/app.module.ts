@@ -1,7 +1,7 @@
 import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
-import { AppConfigService } from './services/app-config.service';
+import { AppConfigService, AppConfigModule } from './services/app-config.service';
 
 // App modules
 import { HomeModule } from './home/home.module';
@@ -41,10 +41,6 @@ import { AuthModule } from './auth/auth.module';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
-}
-
-export function servicesOnRun(config: AppConfigService, token: null) {
-  return () => config.load();
 }
 
 @NgModule({
@@ -99,12 +95,7 @@ export function servicesOnRun(config: AppConfigService, token: null) {
     RoleGuardService,
     AuthInterceptor,
     AppConfigService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: servicesOnRun,
-      multi: true,
-      deps: [AppConfigService]
-    }
+    AppConfigModule.init()
   ],
   bootstrap: [AppComponent]
 })

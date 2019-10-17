@@ -22,7 +22,7 @@ export class AuthService {
     private config: AppConfigService
   ) {
     this.logged = false;
-    this.HOST_URL = this.config.endpoint;
+    
   }
 
   public getToken() {
@@ -35,7 +35,8 @@ export class AuthService {
   public getAuthSatusListener(): Observable<boolean> {
     return this.authStatusListener.asObservable();
   }
-  public createUser(authData: AuthData) {
+  public async createUser(authData: AuthData) {
+    this.HOST_URL = await this.config.load();
     this.http
       .post(this.HOST_URL + '/users/signup', authData)
       .subscribe((response: any) => {
@@ -44,6 +45,7 @@ export class AuthService {
   }
 
   public async login(authData: AuthData) {
+    this.HOST_URL = await this.config.load();
     this.http
       .post<{ token: string; expiresIn: number }>(
         this.HOST_URL + '/users/login',
