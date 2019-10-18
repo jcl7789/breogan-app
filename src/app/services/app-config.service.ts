@@ -1,4 +1,4 @@
-import { Injectable, APP_INITIALIZER } from '@angular/core';
+import { Injectable, APP_INITIALIZER, Provider } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -28,13 +28,13 @@ class ConfigClass {
   endpoint: string;
 }
 
-export function init() {
+export function init(): Provider {
   return {
     provide: APP_INITIALIZER,
     useFactory: servicesOnRun,
     multi: true,
     deps: [AppConfigService]
-  }
+  };
 }
 
 export function servicesOnRun(config: AppConfigService, token: null) {
@@ -43,6 +43,6 @@ export function servicesOnRun(config: AppConfigService, token: null) {
 
 const AppConfigModule = {
   init: init
-}
+};
 
 export { AppConfigModule };
