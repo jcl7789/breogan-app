@@ -38,7 +38,9 @@
     "popper.js": "^1.16.0",
     "rxjs": "6.5.2",
     "rxjs-compat": "6.5.2",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "moment-timezone": "^0.5.27",
+    "mongoose": "^5.7.5"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.802.2",
@@ -48,6 +50,8 @@
     "@types/jasmine": "~3.3.16",
     "@types/jasminewd2": "^2.0.8",
     "@types/node": "~12.6.9",
+    "@types/moment-timezone": "^0.5.12",
+    "@types/mongoose": "^5.5.22",
     "codelyzer": "^5.1.2",
     "jasmine-core": "~3.4.0",
     "jasmine-spec-reporter": "~4.2.1",
