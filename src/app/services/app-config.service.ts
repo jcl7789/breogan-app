@@ -8,10 +8,12 @@ export class AppConfigService {
   private endpoint: string;
 
   constructor(private http: HttpClient) {
-    this.load();
+    this.http.get<ConfigClass>('./assets/app-config.json').toPromise().then((data) => {
+      this.endpoint = data.endpoint;
+    });
   }
 
-  load(): string {
+  load = (): string => {
     this.http
       .get<ConfigClass>('./assets/app-config.json')
       .toPromise()
@@ -20,6 +22,7 @@ export class AppConfigService {
       }).catch((error) => {
         this.endpoint = 'http://localhost:3000';
       });
+      console.log('TCL: AppConfigService -> this.endpoint', this.endpoint);
       return this.endpoint;
   }
 
@@ -27,7 +30,7 @@ export class AppConfigService {
    * getEnpoint
    */
   public getEndpoint(): string {
-    return !this.endpoint ? this.load() : this.endpoint;
+    return this.endpoint;
   }
 
 }

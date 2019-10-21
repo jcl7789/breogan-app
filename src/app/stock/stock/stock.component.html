@@ -4,63 +4,40 @@
       <tr>
         <th>Codigo</th>
         <th>Categoria</th>
+        <th>Sub-categoria</th>
         <th>Producto</th>
         <th>Marca</th>
         <th>Presentacion</th>
         <th>Stock</th>
         <th>Precio</th>
       </tr>
-      <tr>
-        <td>1230025</td>
-        <td>Alimento</td>
-        <td>Balance</td>
-        <td>Eukanuba</td>
-        <td>25 kg</td>
-        <td class="text-warning">10</td>
-        <td>{{ '1250' | currency }}</td>
-      </tr>
-      <tr>
-        <td>1230028</td>
-        <td>Alimento</td>
-        <td>Balance</td>
-        <td>Eukanuba</td>
-        <td>7,5 kg</td>
-        <td class="text-danger">1</td>
-        <td>{{ '350' | currency }}</td>
-      </tr>
-      <tr>
-        <td>1230030</td>
-        <td>Alimento</td>
-        <td>Diet</td>
-        <td>Royal Canin</td>
-        <td>10 kg</td>
-        <td>22</td>
-        <td>{{ 900 | currency }}</td>
-      </tr>
-      <tr>
-        <td>1240077</td>
-        <td>Juguetes</td>
-        <td>Mordillo</td>
-        <td>Kong</td>
-        <td>1 unidad</td>
-        <td class="text-success">55</td>
-        <td> {{ 600 | currency }}</td>
+      <tr *ngFor="let p of productos;let i = index" (click)="seleccionar(i)">
+        <td>{{p.codigo }}</td>
+        <td>{{p.categoria | titlecase}}</td>
+        <td>{{p.subcategoria | titlecase}}</td>
+        <td>{{p.nombre | titlecase}}</td>
+        <td>{{p.marca | titlecase}}</td>
+        <td>{{p.presentacion}} {{p.unidadPresentacion}}</td>
+        <td [ngClass]="{'text-warning': p.stock < 10}">{{ p.stock }}</td>
+        <td>{{ p.precio | currency }}</td>
       </tr>
     </table>
   </div>
   <div class="w-25 h-100 fondo-verde d-block">
     <div class="card-deck p-4">
-      <div class="card text-center">
+      <ng-container *ngIf="!!seleccionado">
+        <div class="card text-center">
           <img src="https://http2.mlstatic.com/alimento-eukanuba-puppy-small-15kg-envios-a-todo-el-pais-D_NQ_NP_22839-MLA20236412383_012015-O.webp" >
-          <p class="titulo mt-4 mb-2">Alimento - Puppies</p>
-          <p class="marca">Eukanuba</p>
-          <p class="precio">$2540 - 25kg</p>
+          <p class="titulo mt-4 mb-2">{{seleccionado.categoria | titlecase}} - {{seleccionado.categoria | titlecase}}</p>
+          <p class="marca">{{seleccionado.marca}}</p>
+          <p class="precio">{{ seleccionado.precio | currency }} - {{ seleccionado.presentacion }}{{ seleccionado.unidadPresentacion }}</p>
           <div class="mx-auto">
-              <fa-icon [icon]="['fas','minus']" class="mr-2"></fa-icon>
-              <span>5 unidades</span>
-              <fa-icon [icon]="['fas','plus']" class="ml-2"></fa-icon>
+            <fa-icon [icon]="['fas','minus']" class="mr-2" (click)="restar()"></fa-icon>
+            <span>{{ unidades }} unidades</span>
+            <fa-icon [icon]="['fas','plus']" class="ml-2" (click)="sumar()"></fa-icon>
           </div>
-      </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
