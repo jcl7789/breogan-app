@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { AuthData } from '../shared/models/auth-data.model';
 import { Subject, Observable } from 'rxjs';
 import { AppConfigService } from './app-config.service';
@@ -22,7 +22,7 @@ export class AuthService {
     private config: AppConfigService
   ) {
     this.logged = false;
-    
+    this.loadHostUrl();
   }
 
   public getToken() {
@@ -32,11 +32,16 @@ export class AuthService {
     return this.logged;
   }
 
+  private loadHostUrl() {
+    this.HOST_URL = this.config.getEndpoint();
+  }
+
   public getAuthSatusListener(): Observable<boolean> {
     return this.authStatusListener.asObservable();
   }
+
   public async createUser(authData: AuthData) {
-    this.HOST_URL = await this.config.load();
+    await this.loadHostUrl();
     this.http
       .post(this.HOST_URL + '/users/signup', authData)
       .subscribe((response: any) => {
@@ -44,27 +49,41 @@ export class AuthService {
       });
   }
 
-  public async login(authData: AuthData) {
-    this.HOST_URL = await this.config.load();
+  public async createClient(authData: AuthData) {
+    await this.loadHostUrl();
     this.http
+      .post(this.HOST_URL + '/users/signup', authData)
+      .subscribe((response: any) => {
+        // navego a formulario de nuevo cliente
+        this.router.navigate(['/']);
+      });
+  }
+
+  public async login(authData: AuthData) {
+    await this.loadHostUrl();
+    const post = this.http
       .post<{ token: string; expiresIn: number }>(
         this.HOST_URL + '/users/login',
         authData
-      )
-      .subscribe((response: any) => {
-        const token = response.token;
-        this.token = token;
-        if (token) {
-          const expiresInDuration = response.expiresIn;
-          this.setAuthTimer(expiresInDuration);
-          this.saveAuthData(
-            token,
-            this.calculateExpirationDate(expiresInDuration)
-          );
-          this.setStatus(true);
-          this.router.navigate(['/']);
-        }
-      });
+      ).toPromise();
+    return post.then((response) => {
+      const token = response.token;
+      this.token = token;
+      if (token) {
+        const expiresInDuration = response.expiresIn;
+        this.setAuthTimer(expiresInDuration);
+        this.saveAuthData(
+          token,
+          this.calculateExpirationDate(expiresInDuration)
+        );
+        this.setStatus(true);
+        this.router.navigate(['/']);
+      }
+    }).catch((error: HttpErrorResponse) => {
+      if (error.status === 401) {
+        return 'No reconocemos esa combinación de usuario y contraseña';
+      }
+    });
   }
 
   private setAuthTimer(expiresInDuration: number) {

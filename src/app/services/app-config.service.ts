@@ -22,6 +22,14 @@ export class AppConfigService {
       });
       return this.endpoint;
   }
+
+  /**
+   * getEnpoint
+   */
+  public getEndpoint(): string {
+    return !this.endpoint ? this.load() : this.endpoint;
+  }
+
 }
 
 class ConfigClass {

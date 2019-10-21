@@ -6,13 +6,16 @@
         <img src="../../../assets/img/logo.jpg" alt="" width="80%"  height="80%">
       </div>
       <div class="form-label-group">
-        <input type="email" formControlName="email" class="form-control" placeholder="E-mail" required autofocus autocomplete="username">
-        <p *ngIf="invalidEmail"><small class="text-danger">Verificá tu email</small></p>
+        <input type="email" (change)="onTextChanged()" formControlName="email" class="form-control" placeholder="E-mail" required autofocus autocomplete="username">
       </div>
       <div class="form-label-group">
-        <input type="password"  formControlName="password" class="form-control" placeholder=" " required autocomplete="current-password">
-        <p *ngIf="invalidPass"><small class="text-danger">Contraseña inválida</small></p>
+        <input type="password" (change)="onTextChanged()" formControlName="password" class="form-control" placeholder="Contraseña" required autocomplete="current-password">
       </div>
+      <p>
+        <small *ngIf="invalidEmail" class="text-danger">Verificá tu email. </small>
+        <small *ngIf="invalidPass" class="text-danger">Contraseña inválida. </small>
+        <small *ngIf="!!invalidLoginMessage" class="text-danger">{{invalidLoginMessage}}</small>
+      </p>
       <button class="btn btn-lg btn-primary btn-block">Iniciar sesion</button>
       <a [routerLink]="['/signup']" class="btn btn-link">¡Quiero ser usuario!</a>
     </form>
