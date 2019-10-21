@@ -5,39 +5,18 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AppConfigService {
-  private endpoint: string;
+  public endpoint: string;
 
-  constructor(private http: HttpClient) {
-    this.http.get<ConfigClass>('./assets/app-config.json').toPromise().then((data) => {
-      this.endpoint = data.endpoint;
-    });
-  }
+  constructor(private http: HttpClient) { }
 
-  load = (): string => {
-    this.http
-      .get<ConfigClass>('./assets/app-config.json')
-      .toPromise()
-      .then(data => {
-        this.endpoint = data.endpoint;
-      }).catch((error) => {
-        this.endpoint = 'http://localhost:3000';
-      });
-      console.log('TCL: AppConfigService -> this.endpoint', this.endpoint);
-      return this.endpoint;
-  }
-
-  /**
-   * getEnpoint
-   */
-  public getEndpoint(): string {
-    return this.endpoint;
+  async load() {
+    const resp = await this.http.get<ConfigClass>('assets/app-config.json').toPromise();
+    this.endpoint = resp ? resp.endpoint : 'http://localhost:3000';
   }
 
 }
 
-class ConfigClass {
-  endpoint: string;
-}
+class ConfigClass { endpoint: string; }
 
 export function init(): Provider {
   return {
@@ -49,7 +28,11 @@ export function init(): Provider {
 }
 
 export function servicesOnRun(config: AppConfigService, token: null) {
-  return () => config.load();
+  return (): Promise<any> => {
+    config.load();
+    console.log(config);
+    return config.load();
+  }
 }
 
 const AppConfigModule = {

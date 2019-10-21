@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StockComponent } from './stock/stock.component';
 import { MatTableModule } from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatTableModule,
     FontAwesomeModule
   ],
-  declarations: [StockComponent],
+  declarations: [StockComponent, ProductDetailComponent],
   entryComponents: [StockComponent],
 })
 export class StockModule { }

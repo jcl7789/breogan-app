@@ -11,9 +11,9 @@ import { Producto } from 'src/app/services/models/producto.model';
 export class StockComponent implements OnInit {
 
   productos: Producto[];
-  seleccionado: Producto;
-  unidades = 0;
+  
 
+  
   constructor(private productsService: ProductosService, private cd: ChangeDetectorRef) {
   }
 
@@ -22,22 +22,8 @@ export class StockComponent implements OnInit {
     this.cd.markForCheck();
   }
 
-  sumar() {
-    if (this.unidades < this.seleccionado.stock) {
-      this.unidades++;
-      this.cd.markForCheck();
-    }
-  }
-
-  restar() {
-    if (this.unidades > 1) {
-      this.unidades--;
-      this.cd.markForCheck();
-    }
-  }
-
   seleccionar(index: number) {
-    this.seleccionado = this.productos[index];
+    this.productos[index];
     this.cd.markForCheck();
   }
 

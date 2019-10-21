@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
+import { ChartComponent } from './chart/chart.component';
 
 @NgModule({
   imports: [
@@ -11,7 +12,7 @@ import { HeaderComponent } from './header/header.component';
     FontAwesomeModule,
     AppRoutingModule
   ],
-  declarations: [FooterComponent, HeaderComponent],
+  declarations: [FooterComponent, HeaderComponent, ChartComponent],
   exports: [FooterComponent, HeaderComponent]
 })
 export class SharedModule { }

@@ -33,7 +33,7 @@ export class AuthService {
   }
 
   private loadHostUrl() {
-    this.HOST_URL = this.config.getEndpoint();
+    this.HOST_URL = this.config.endpoint;
   }
 
   public getAuthSatusListener(): Observable<boolean> {
