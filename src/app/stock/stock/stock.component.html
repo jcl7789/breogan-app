@@ -1,7 +1,7 @@
 <div class="h-100 d-flex flex-column">
   <div class="py-3 mx-auto  overflow-auto">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Filtro" aria-label="Filter" (keyup)="filtrar()" #filterInput>
+      <input type="text" class="form-control" placeholder="Filtro" aria-label="Filter" (keyup)="filtrar()" (change)="filtrar()" (keypress)="filtrar()" #filterInput>
     </div>
   </div>
   <div class="mx-auto overflow-auto" *ngIf="productos && productos.length > 0; else noData">

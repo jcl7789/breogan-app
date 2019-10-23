@@ -20,7 +20,10 @@ body {
     }
 }
 
-.popover { max-width: 600px!important; }
+.popover {
+  min-width: 400px;
+  max-width: 600px!important;
+}
 
 .popover-body {
   background-color: #737373 ;
@@ -71,4 +74,10 @@ body {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.card {
+  background-color: rgb(6, 82, 35);
+  color: #fff;
+  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, .5);
 }

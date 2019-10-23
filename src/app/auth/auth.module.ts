@@ -8,6 +8,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { RegisterComponent } from './register/register.component';
+import { NewClientFormComponent } from './register/new-client-form/new-client-form.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { RegisterComponent } from './register/register.component';
   declarations: [
     LoginComponent,
     SignupComponent,
-    RegisterComponent
+    RegisterComponent,
+    NewClientFormComponent
   ]
 })
 export class AuthModule { }

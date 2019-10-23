@@ -15,6 +15,7 @@ export class StockComponent implements OnInit, OnDestroy {
   productos: Producto[];
   seleccionado: Producto;
   unidades = 0;
+  private totalProducts = 0;
 
   @ViewChild('popover', null) popoverElement: NgbPopover;
   @ViewChild('filterInput', { read: ElementRef, static: false }) filterInput: ElementRef;
@@ -24,13 +25,18 @@ export class StockComponent implements OnInit, OnDestroy {
     private cd: ChangeDetectorRef,
     private popConfig: NgbPopoverConfig
   ) {
-    popConfig.placement = ['right-top', 'right-bottom'];
+    popConfig.placement = ['bottom', 'top'];
     popConfig.autoClose = 'outside';
     popConfig.triggers = 'manual';
   }
 
   ngOnInit() {
+    this.cargarProductos();
+  }
+
+  cargarProductos() {
     this.productos = this.productsService.getProductos();
+    this.totalProducts = this.productos.length;
     this.cd.markForCheck();
   }
 
@@ -67,6 +73,9 @@ export class StockComponent implements OnInit, OnDestroy {
   }
 
   filtrar() {
+    if (this.productos.length !== this.totalProducts) {
+      this.cargarProductos();
+    }
     const value = String(this.filterInput.nativeElement.value).toLowerCase();
     if (value) {
       const filtered = this.productos.filter((producto) => {
@@ -74,15 +83,13 @@ export class StockComponent implements OnInit, OnDestroy {
         for (let property in producto) {
           if (String(producto[property]).toLowerCase().includes(value)
             && property !== '_id' && property !== 'imgUrl' && property !== 'activo') {
-            console.log(property);
             flag = true;
           }
         }
         return flag;
       });
       this.productos = filtered;
-    }
-    else {
+    } else {
       this.productos = this.productsService.getProductos();
     }
     this.cd.markForCheck();
@@ -90,5 +97,6 @@ export class StockComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.productsService.productosSnapshot = [];
+    this.totalProducts = 0;
   }
 }

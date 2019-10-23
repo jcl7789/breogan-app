@@ -19,28 +19,6 @@ a:hover {
   border: .05rem solid #fff;
 }
 
-
-/*
- * Base structure
- */
-
-.inner.cover {
-  height: 100%;
-  display: -ms-flexbox;
-  display: -webkit-box;
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  -ms-flex-pack: center;
-  -webkit-box-pack: center;
-  justify-content: center;
-
-}
-
-.cover-container {
-  max-width: 42em;
-}
-
 /*
  * Cover
  */
@@ -52,18 +30,8 @@ a:hover {
   font-weight: 700;
 }
 
-.card {
-  background-color: rgb(6, 82, 35);
-  color: #fff;
-  box-shadow: 10px 10px 20px 0px rgba(0, 0, 0, .5);
-}
-
 .author {
   border-radius: 50%;
   height: 100px;
   width: 100px;
-}
-
-.w-90 {
-  width: 90%;
 }
