@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AppConfigService } from '../app-config.service';
-import { Producto } from '../models/producto.model';
 import { HttpClient } from '@angular/common/http';
+
+import { Producto } from '../models/producto.model';
 import { ResponseError } from '../models/response-error.model';
-import { RenglonVenta } from '../models/renglon-venta.model';
+import { ItemCarrito } from 'src/app/shared/models/item-carrito.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductosService {
   private endpoint: string;
-  private carrito: RenglonVenta[] = [];
+  private carrito: ItemCarrito[] = [];
+
+  public productosSnapshot: Producto[] = [];
 
   constructor(
     private config: AppConfigService,
@@ -20,51 +23,62 @@ export class ProductosService {
   }
 
   getProductos(): Producto[] {
-    let productos: Producto[] = [];
-    this.http.get<Producto[]>(this.endpoint + '/products/').toPromise().then((data) => {
-      console.log(data);
-      data.forEach((producto) => {
-        const p = Object.assign({}, producto);
-        productos.push(p);
+    if (this.productosSnapshot && this.productosSnapshot.length === 0) {
+      let productos: Producto[] = [];
+      this.http.get<Producto[]>(this.endpoint + '/products/').toPromise().then((data) => {
+        data.forEach((producto) => {
+          const p = Object.assign({}, producto);
+          productos.push(p);
+        });
+      }).catch((error: ResponseError) => {
+        console.log(error);
       });
-    }).catch((error: ResponseError) => {
-      console.log(error);
-    });
-    return productos;
+      this.productosSnapshot = productos;
+    }
+    return this.productosSnapshot;
   }
 
   agregarProducto(seleccionado: Producto, unidades: number) {
-    const index = this.carrito.findIndex((item) => { return item.cod_producto === seleccionado.codigo });
+    const index = this.carrito.findIndex((item) => item.codigo === seleccionado.codigo);
     if (index === -1) {
-      const renglon: RenglonVenta = Object.assign({}, {
-        cod_producto: seleccionado.codigo,
+      const itemCarrito: ItemCarrito = Object.assign({}, {
+        codigo: seleccionado.codigo,
         cantidad: unidades,
+        marca: seleccionado.marca,
+        precioUnidad: seleccionado.precio,
+        nombre: seleccionado.nombre,
         subtotal: seleccionado.precio * unidades
       });
-      this.carrito.push(renglon);
+      this.carrito.push(itemCarrito);
     } else {
       this.carrito[index].cantidad += unidades;
-      this.carrito[index].subtotal = this.carrito[index].cantidad * seleccionado.precio;
     }
   }
 
   quitarProducto(seleccionado: Producto, unidades?: number) {
-    const index = this.carrito.findIndex((item) => { return item.cod_producto === seleccionado.codigo });
+    const index = this.carrito.findIndex((item) => item.codigo === seleccionado.codigo);
     if (index === -1) {
       return;
     }
-    let newCarrito: RenglonVenta[] = [];
-    this.carrito.forEach((renglon, i) => {
+    let newCarrito: ItemCarrito[] = [];
+    this.carrito.forEach((item, i) => {
       if (i !== index) {
-        newCarrito.push(renglon);
+        newCarrito.push(item);
       } else {
-        if (unidades && renglon.cantidad - unidades > 0) {
-          renglon.cantidad = renglon.cantidad - unidades;
-          newCarrito.push(renglon);
+        if (unidades && item.cantidad - unidades > 0) {
+          item.cantidad = item.cantidad - unidades;
+          newCarrito.push(item);
         }
       }
     });
     this.carrito = newCarrito.length === 0 ? [] : newCarrito;
+  }
 
+  estadoCarrito(): ItemCarrito[] {
+    return this.carrito;
+  }
+
+  modificarCarrito(newCarrito: ItemCarrito[]): void {
+    this.carrito = newCarrito;
   }
 }

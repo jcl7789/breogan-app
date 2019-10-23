@@ -13,4 +13,7 @@ export class Producto {
   precio: number;
   fechaUltimoMovimiento: Date;
   activo: boolean;
+  imgUrl: string;
+  minStock: number;
+  maxStock: number;
 }

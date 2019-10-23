@@ -1,27 +1,79 @@
-<div class="h-100 d-flex">
-  <div class="mx-auto overflow-auto">
-    <table class="table table-striped table-dark">
-      <tr>
-        <th>Codigo</th>
-        <th>Categoria</th>
-        <th>Sub-categoria</th>
-        <th>Producto</th>
-        <th>Marca</th>
-        <th>Presentacion</th>
-        <th>Stock</th>
-        <th>Precio</th>
-      </tr>
-      <tr *ngFor="let p of productos;let i = index" (click)="seleccionar(i)">
-        <td>{{p.codigo }}</td>
-        <td>{{p.categoria | titlecase}}</td>
-        <td>{{p.subcategoria | titlecase}}</td>
-        <td>{{p.nombre | titlecase}}</td>
-        <td>{{p.marca | titlecase}}</td>
-        <td>{{p.presentacion}} {{p.unidadPresentacion}}</td>
-        <td [ngClass]="{'text-warning': p.stock < 10}">{{ p.stock }}</td>
-        <td>{{ p.precio | currency }}</td>
-      </tr>
+<div class="h-100 d-flex flex-column">
+  <div class="py-3 mx-auto  overflow-auto">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Filtro" aria-label="Filter" (keyup)="filtrar()" #filterInput>
+    </div>
+  </div>
+  <div class="mx-auto overflow-auto" *ngIf="productos && productos.length > 0; else noData">
+    <table class="table table-striped table-dark table-fixed-size">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Categoria</th>
+          <th>Sub-categoria</th>
+          <th>Producto</th>
+          <th>Marca</th>
+          <th>Presentacion</th>
+          <th>Stock</th>
+          <th>Precio</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let p of productos;let i = index">
+          <tr (click)="seleccionar(i)" [ngbPopover]="popContenido" #popover="ngbPopover" [popoverTitle]="popTitulo"
+            *ngIf="p.activo">
+            <th scope="row">{{p.codigo }}</th>
+            <td>{{p.categoria | titlecase}}</td>
+            <td>{{p.subcategoria | titlecase}}</td>
+            <td>{{p.nombre | titlecase}}</td>
+            <td>{{p.marca | titlecase}}</td>
+            <td>{{p.presentacion}} {{p.unidadPresentacion | titlecase}}</td>
+            <td [ngClass]="{
+                          'text-warning': p.stock < p.minStock,
+                          'text-success': p.stock > p.maxStock
+                        }">{{ p.stock }}</td>
+            <td>{{ p.precio | currency }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
     </table>
   </div>
-  
+  <ng-template #noData>
+    <div class="mx-auto overflow-auto">
+      <p class="text-white text-center">Sin datos para mostrar</p>
+    </div>
+
+  </ng-template>
+  <ng-template #popContenido>
+    <div class="my-popover">
+      <div class="d-flex flex-column">
+        <div class="d-flex flex-row w-100">
+          <div class="d-flex flex-column p-3 w-50">
+            <p>{{seleccionado.categoria | titlecase}}</p>
+            <p class="precio">{{ seleccionado.precio | currency }}</p>
+            <p>{{ seleccionado.presentacion }} {{ seleccionado.unidadPresentacion }}</p>
+          </div>
+          <div class="d-flex flex-column img-popover-container p-2">
+            <img class="img-popover"
+              src="{{ !!seleccionado.imgUrl ? seleccionado.imgUrl : './../../../assets/img/imagen-no-disponible.jpg' }}">
+          </div>
+        </div>
+        <div class="d-flex flex-row mt-4 mb-3 mx-auto">
+          <fa-icon [icon]="['fas','minus']" class="mr-2" (click)="restar();$event.stopPropagation()"></fa-icon>
+          <span>{{ unidades }} unidades</span>
+          <fa-icon [icon]="['fas','plus']" class="ml-2" (click)="sumar();$event.stopPropagation()"></fa-icon>
+        </div>
+        <div class="d-flex flex-row py-2 mx-auto btn-block">
+          <button type="button" class="btn btn-primary btn-sm mx-auto" (click)="editar()">Editar</button>
+          <button type="button" class="btn btn-success btn-sm mx-auto" (click)="agregarACarrito()">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #popTitulo>
+    <p class="titulo"><b>{{seleccionado.marca | titlecase }}</b></p>
+    <p class="subtitulo"><b>{{seleccionado.nombre | titlecase }}</b></p>
+  </ng-template>
+
+
 </div>

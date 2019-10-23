@@ -3,15 +3,16 @@ import { CommonModule } from '@angular/common';
 import { StockComponent } from './stock/stock.component';
 import { MatTableModule } from '@angular/material/table';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports: [
     CommonModule,
     MatTableModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
-  declarations: [StockComponent, ProductDetailComponent],
+  declarations: [StockComponent],
   entryComponents: [StockComponent],
 })
 export class StockModule { }

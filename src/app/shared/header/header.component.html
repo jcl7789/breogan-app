@@ -35,14 +35,20 @@
               <span>Estadisticas</span>
             </a>
           </li>
-          <li class="nav-item mr-4 float-right">
+          <li class="nav-item mr-4 ml-auto">
+            <a class="nav-link tooltip-wide" (click)="mostrarCarrito()" [ngbPopover]="popContenido" [popoverTitle]="popTitulo" container="body"
+              #popover="ngbPopover">
+              <fa-icon [icon]="['fas','shopping-cart']" class="mr-1 icon"></fa-icon>
+            </a>
+          </li>
+          <li class="nav-item mr-4">
             <a class="nav-link" routerLink="profile" routerLinkActive="active">
               <fa-icon [icon]="['fas','user']" class="mr-1"></fa-icon>
               <span class="right">Perfil</span>
             </a>
           </li>
-          <li class="nav-item mr-4 ml-auto">
-            <a  class="nav-link" (click)="doLogout()">
+          <li class="nav-item mr-4">
+            <a class="nav-link" (click)="doLogout()">
               <fa-icon [icon]="['fas','sign-out-alt']" class="mr-1"></fa-icon>
               <span class="right">Salir</span>
             </a>
@@ -50,19 +56,79 @@
         </ul>
         <ul *ngIf="!isLogged" class="navbar-nav mr-auto">
           <li class="nav-item mr-4 ml-auto">
-              <a class="nav-link" routerLink="login" routerLinkActive="active">
-                  <fa-icon [icon]="['fas','sign-in-alt']" class="mr-1"></fa-icon>
-                  <span class="right">Iniciar sesion</span>
-                </a>
+            <a class="nav-link" routerLink="login" routerLinkActive="active">
+              <fa-icon [icon]="['fas','sign-in-alt']" class="mr-1"></fa-icon>
+              <span class="right">Iniciar sesion</span>
+            </a>
           </li>
           <li class="nav-item mr-4 float-right">
-              <a class="nav-link" routerLink="signup" routerLinkActive="active">
-                  <fa-icon [icon]="['fas','user-plus']" class="mr-1"></fa-icon>
-                  <span class="right">Registrarse</span>
-                </a>
+            <a class="nav-link" routerLink="signup" routerLinkActive="active">
+              <fa-icon [icon]="['fas','user-plus']" class="mr-1"></fa-icon>
+              <span class="right">Registrarse</span>
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 </header>
+
+<ng-template #popTitulo class="">
+<p class="text-white">Carrito de compras
+  <span *ngIf="carrito && carrito.length > 0"> ({{ carrito.length }})</span>
+</p>
+</ng-template>
+<ng-template #popContenido class="">
+  <ng-container *ngIf="carrito && carrito.length > 0; else noitems" class="">
+    <div class="row border-bottom col-12 px-3 py-2 m-0" *ngFor="let item of carrito; let i = index">
+      <div class="flex-column col-4 px-0">
+        <p>
+          {{ item.codigo }}
+        </p>
+        <p>
+          <b>{{ item.marca }}</b> {{ item.nombre }}
+        </p>
+      </div>
+      <div class="flex-row my-auto col-3 mx-auto">
+        <p>
+          <a (click)="quitarUnidad(i)">
+            <fa-icon [icon]="['fas','minus-circle']" class="mr-1"></fa-icon>
+          </a>
+          <span class="mx-1">
+            {{ item.cantidad }}
+          </span>
+          <a (click)="agregarUnidad(i)">
+            <fa-icon [icon]="['fas','plus-circle']" class="mr-1"></fa-icon>
+          </a>
+        </p>
+      </div>
+      <div class="flex-row my-auto col-3">
+        <p>
+          <span>
+            <b>
+              {{ item.precioUnidad * item.cantidad | currency }}
+            </b>
+          </span>
+        </p>
+      </div>
+      <div class="flex-row my-auto">
+        <a class="ml-auto text-danger" (click)="quitarElemento(i)">
+            <fa-icon [icon]="['fas','times-circle']" class="mr-1"></fa-icon>
+        </a>
+      </div>
+    </div>
+    <div class="row mx-0 py-2">
+      <span class="text-left col-6"><b>Total</b></span>
+      <span class="text-right col-6">{{ total | currency }}</span>
+    </div>
+    <div class="d-flex mx-auto py-2">
+        <button type="button" class="btn btn-success btn-block">Comprar</button>
+    </div>
+  </ng-container>
+  <ng-template #noitems>
+    <div class="d-flex flex-row px-5 text-center w-100">
+      <p> Sin elementos </p>
+    </div>
+  </ng-template>
+
+</ng-template>

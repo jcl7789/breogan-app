@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { AppConfigService } from './services/app-config.service';
 
@@ -7,7 +7,7 @@ import { AppConfigService } from './services/app-config.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
   titulo = 'Breogan - App';
   fecha = new Date();
   showDashboard = true;
@@ -17,5 +17,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.appConfig.load();
     this.authService.autoAuthUser();
+  }
+
+  ngOnDestroy(): void {
+    console.log('Hasta luego');
   }
 }

@@ -1,6 +1,6 @@
 /* Structure */
-table {
-  width: 100%;
+.table-fixed-size {
+  width: 80vw;
 }
 
 .mat-form-field {
@@ -8,21 +8,21 @@ table {
   width: 100%;
 }
 
-.table-dark {
-  color: #fff;
-  background-color: #01301a;
-}
-
-.fondo-verde {
-  background-color: #01301a;
+.my-dark-background {
+  background-color: #343a40;
 }
 
 p {
-  color: black;
+  word-break: keep-all;
 
   &.titulo {
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 1.6em;
+  }
+
+  &.subtitulo {
+    font-weight: bold;
+    font-size: 1.4em;
   }
 
   &.marca {
@@ -30,8 +30,8 @@ p {
   }
 
   &.precio {
-    font-size: 1.5em;
-    font-weight: normal;
+    font-size: 1.6em;
+    font-weight: bold;
   }
 }
 

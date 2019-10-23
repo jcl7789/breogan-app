@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
 
 body {
-    font-family:'Source Sans Pro', sans-serif; 
+    font-family:'Source Sans Pro', sans-serif;
     width: 100vw;
     box-sizing: border-box;
     overflow: hidden;
@@ -18,4 +18,57 @@ body {
     &central{
         height: 86vh;
     }
+}
+
+.popover { max-width: 600px!important; }
+
+.popover-body {
+  background-color: #737373 ;
+
+  p, span, a {
+    color: #FFF;
+  }
+}
+
+.bs-popover-auto[x-placement^="right"] > .arrow::after, .bs-popover-right > .arrow::after {
+  border-right-color: #333;
+
+}
+
+.bs-popover-auto[x-placement^="left"] > .arrow::after, .bs-popover-left > .arrow::after {
+  border-left-color: #333;
+
+}
+
+.bs-popover-auto[x-placement^="bottom"] > .arrow::after, .bs-popover-bottom > .arrow::after {
+  border-bottom-color: #333;
+
+}
+
+.bs-popover-auto[x-placement^="top"] > .arrow::after, .bs-popover-top > .arrow::after {
+  border-top-color: #333;
+
+}
+
+.bs-popover-auto[x-placement^="bottom"] .popover-header::before, .bs-popover-bottom .popover-header::before {
+  border-bottom: 0px;
+}
+
+.popover-header {
+  background-color: #333;
+  border-bottom: 1px solid #000;
+  border-top-left-radius: calc(.3rem - 1px);
+  border-top-right-radius: calc(.3rem - 1px);
+}
+
+.img-popover-container {
+  width: 200px;
+}
+
+.img-popover {
+  border: 1px solid #666;
+  border-radius: 4px;
+  display: block;
+  width: 100%;
+  height: auto;
 }

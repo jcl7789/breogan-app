@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, ChangeDetectorRef, OnInit } from '@angular/core';
 
 export interface PeriodicElement {
   name: string;
@@ -25,7 +25,29 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './sales.component.html',
   styleUrls: ['./sales.component.scss']
 })
-export class SalesComponent {
+export class SalesComponent implements OnInit {
+
+  @ViewChild('filterInput', { read: ElementRef, static: false }) filterInput: ElementRef;
   displayedColumns: string[] = ['Numero', 'Nombre', 'Peso', 'Simbolo'];
   datos = ELEMENT_DATA;
+
+  constructor( private cd: ChangeDetectorRef) { }
+
+  filtrar() {
+    const value = String(this.filterInput.nativeElement.value).toLowerCase();
+    if (value) {
+      const aux = this.datos.filter((item) => {
+        return item.name.includes(value) || item.symbol.includes(value)
+          || String(item.position).includes(value) || String(item.weight).includes(value);
+      });
+      this.datos = aux;
+    } else {
+      this.datos = ELEMENT_DATA;
+    }
+    this.cd.markForCheck();
+  }
+
+  ngOnInit(): void {
+
+  }
 }

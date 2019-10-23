@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SalesComponent } from './sales/sales.component';
 import { AppRoutingModule } from './../app-routing.module';
 import { MatTableModule } from '@angular/material/table';
+import { NewSaleComponent } from './new-sale/new-sale.component';
 
 
 
@@ -12,6 +13,6 @@ import { MatTableModule } from '@angular/material/table';
     AppRoutingModule,
     MatTableModule
   ],
-  declarations: [SalesComponent]
+  declarations: [SalesComponent, NewSaleComponent]
 })
 export class SalesModule { }

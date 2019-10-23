@@ -10,6 +10,11 @@ import { SalesModule } from './sales/sales.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { StatsModule } from './stats/stats.module';
 import { ProfileModule } from './profile/profile.module';
+import { AuthGuardService } from './services/auth-guard.service';
+import { AuthService } from './services/auth.service';
+import { RoleGuardService } from './services/role-guard.service';
+import { AuthInterceptor } from './services/auth-interceptor';
+import { AuthModule } from './auth/auth.module';
 
 // Angular modules
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,6 +28,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { JwtModule } from '@auth0/angular-jwt';
+import { HttpClientModule } from '@angular/common/http';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 
 // iconos
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -30,14 +39,6 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { AuthGuardService } from './services/auth-guard.service';
-import { AuthService } from './services/auth.service';
-import { RoleGuardService } from './services/role-guard.service';
-import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
-import { AuthInterceptor } from './services/auth-interceptor';
-import { AuthModule } from './auth/auth.module';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -68,6 +69,7 @@ export function tokenGetter() {
     MatFormFieldModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    NgbModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter
