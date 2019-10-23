@@ -1,11 +1,23 @@
 <main role="main" class="container">
-    <div class="card mt-5">
-      <div class="card-header">
-        <h1>Formularios</h1>
-      </div>
-      <div class="card-body">
-          <app-new-client-form></app-new-client-form>
-          <app-new-client-form></app-new-client-form>
+  <div class="card mt-5">
+    <div class="card-header">
+      <h1>Formularios</h1>
+    </div>
+    <div class="card-body d-flex">
+      <div class="flex-column">
+        <ng-container>
+          <app-new-brand-form></app-new-brand-form>
+        </ng-container>
+        <ng-container>
+          <app-new-category-form></app-new-category-form>
+        </ng-container>
+        <ng-container>
+          <app-new-product-form></app-new-product-form>
+        </ng-container>
+        <ng-container>
+          <app-new-unit-form></app-new-unit-form>
+        </ng-container>
       </div>
     </div>
-  </main>
+  </div>
+</main>
