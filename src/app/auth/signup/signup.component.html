@@ -7,14 +7,19 @@
         </div>
         <div class="form-label-group">
           <input type="email" formControlName="email" class="form-control" placeholder="E-mail" required autofocus autocomplete="username">
-          <p *ngIf="false"><small class="text-danger">Verificá tu email</small></p>
         </div>
         <div class="form-label-group">
           <input type="password"  formControlName="password" class="form-control" placeholder="Contraseña" required autocomplete="current-password">
-          <p *ngIf="false"><small class="text-danger">Contraseña inválida</small></p>
         </div>
+        <p>
+            <small *ngIf="invalidEmail" class="text-danger">Completá tu email. </small>
+            <br>
+            <small *ngIf="invalidPass" class="text-danger">Debes proporcionar una contraseña. </small>
+            <br>
+            <small *ngIf="!!invalidLoginMessage" class="text-danger">{{invalidSignupMessage}}</small>
+        </p>
         <button class="btn btn-lg btn-primary btn-block">Registrarme</button>
-        <a [routerLink]="['/login']" class="btn btn-link">¡Ya soy usuario!</a>
+        <a [routerLink]="['/login']" class="btn btn-link">¡Ya soy cliente!</a>
       </form>
     </div>
   </div>

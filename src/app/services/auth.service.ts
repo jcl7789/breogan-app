@@ -15,6 +15,7 @@ export class AuthService {
   private token: string;
   private tokenTimer: any;
   private authStatusListener = new Subject<boolean>();
+  private prospect: AuthData;
 
   constructor(
     private router: Router,
@@ -41,12 +42,16 @@ export class AuthService {
   }
 
   public async createUser(authData: AuthData) {
-    await this.loadHostUrl();
-    this.http
-      .post(this.HOST_URL + '/users/signup', authData)
-      .subscribe((response: any) => {
-        this.router.navigate(['/']);
-      });
+    this.prospect = authData;
+    this.router.navigate(['/register']);
+  }
+
+  public cancelUser(): void {
+    this.prospect = null;
+  }
+
+  public getProspect(): AuthData {
+    return this.prospect;
   }
 
   public async createClient(authData: AuthData) {
@@ -54,7 +59,13 @@ export class AuthService {
     this.http
       .post(this.HOST_URL + '/users/signup', authData)
       .subscribe((response: any) => {
-        // navego a formulario de nuevo cliente
+        this.router.navigate(['/']);
+      });
+    await this.loadHostUrl();
+    this.http
+      .post(this.HOST_URL + '/users/signup', authData)
+      .subscribe((response: any) => {
+        // navego a home
         this.router.navigate(['/']);
       });
   }

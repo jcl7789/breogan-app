@@ -1,1 +1,72 @@
-<p>register works!</p>
+  <main class="p-5 mx-auto w-50">
+
+    <form class="form card" action=" " method="post" id="register_form">
+      <fieldset>
+        <!-- Form Name -->
+        <div class="card-header">
+          <h2><b>Nuevo cliente</b></h2>
+        </div>
+        <div class="card-body">
+
+          <!-- Row -->
+          <div class="form-row my-2 px-5">
+            <div class="col mx-auto my-1">
+              <label class="control-label">Nombre</label>
+              <input name="nombre" placeholder="Nombre" class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-row my-2 px-5">
+            <div class="col mx-auto my-1">
+              <label class="control-label">Apellido</label>
+              <input name="apellido" placeholder="Apellido" class="form-control" type="text">
+            </div>
+          </div>
+
+          <!-- Row -->
+          <div class="form-row my-2 px-5">
+            <!-- Text input-->
+            <div class="col-sm-4 ml-auto">
+              <label class="control-label">Tipo Doc</label>
+              <select name="tipoDni" placeholder="Tipo Dni" class="form-control">
+                <option *ngFor="let item of tiposDni" [value]="item">{{item}}</option>
+              </select>
+            </div>
+            <!-- Text input-->
+            <div class="col-sm-8 mr-auto">
+              <label class="control-label">Numero de DNI</label>
+              <input name="numeroDni" placeholder="Numero de DNI" class="form-control" type="text">
+            </div>
+          </div>
+          <div class="form-row my-2 px-5">
+            <!-- Text input-->
+            <div class="col ml-auto">
+              <label class="control-label">Cod Area</label>
+              <input name="area" placeholder="11" class="form-control" type="text">
+            </div>
+            <!-- Text input-->
+            <div class="col">
+              <label class="control-label">Numero</label>
+              <input name="telefono" placeholder="45555555" class="form-control" type="text">
+            </div>
+            <!-- Text input-->
+            <div class="col-auto mr-auto">
+              <label class="control-label">Tipo</label>
+              <select name="tipo" placeholder="Tipo" class="form-control">
+                <option *ngFor="let item of tiposTelefonos" [value]="item">{{item}}</option>
+              </select>
+            </div>
+
+          </div>
+
+          <!-- Button -->
+          <div class="form-row p-5">
+            <button type="submit" class="btn btn-primary mx-auto" (click)="registrar();">
+              Registrarse
+            </button>
+          </div>
+        </div>
+
+      </fieldset>
+    </form>
+    <!-- /.container -->
+  </main>

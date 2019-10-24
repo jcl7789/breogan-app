@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Producto } from '../models/producto.model';
 import { ResponseError } from '../models/response-error.model';
 import { ItemCarrito } from 'src/app/shared/models/item-carrito.model';
+import { ObjectID } from 'bson';
+import { ResponseData } from '../models/response-data.model';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +49,8 @@ export class ProductosService {
         marca: seleccionado.marca,
         precioUnidad: seleccionado.precio,
         nombre: seleccionado.nombre,
-        subtotal: seleccionado.precio * unidades
+        subtotal: seleccionado.precio * unidades,
+        _id: seleccionado._id
       });
       this.carrito.push(itemCarrito);
     } else {
@@ -78,7 +81,23 @@ export class ProductosService {
     return this.carrito;
   }
 
+  clearCarrito(): void {
+    this.carrito = [];
+  }
+
   modificarCarrito(newCarrito: ItemCarrito[]): void {
     this.carrito = newCarrito;
+  }
+
+  actualizarStock(_id: ObjectID, unidades: number) {
+    this.http.post<ResponseData>(this.endpoint + '/products/refresh/' + _id, { 'unidades': unidades }).toPromise()
+      .then((response: ResponseData) => {
+        if (response.code === 1) {
+          console.log(_id);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 }

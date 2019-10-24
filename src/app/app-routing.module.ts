@@ -10,6 +10,7 @@ import { AuthGuardService as AuthGuard } from '../app/services/auth-guard.servic
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { NewSaleComponent } from './sales/new-sale/new-sale.component';
+import { RegisterComponent } from './auth/register/register.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'stats', component: StatsComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '' }
 ];

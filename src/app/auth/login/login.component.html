@@ -13,11 +13,13 @@
       </div>
       <p>
         <small *ngIf="invalidEmail" class="text-danger">Verificá tu email. </small>
+        <br>
         <small *ngIf="invalidPass" class="text-danger">Contraseña inválida. </small>
+        <br>
         <small *ngIf="!!invalidLoginMessage" class="text-danger">{{invalidLoginMessage}}</small>
       </p>
       <button class="btn btn-lg btn-primary btn-block">Iniciar sesion</button>
-      <a [routerLink]="['/signup']" class="btn btn-link">¡Quiero ser usuario!</a>
+      <a [routerLink]="['/signup']" class="btn btn-link">¡Quiero ser cliente!</a>
     </form>
   </div>
 </div>

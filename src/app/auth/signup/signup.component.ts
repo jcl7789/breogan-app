@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { AuthData } from 'src/app/shared/models/auth-data.model';
 
@@ -13,6 +13,7 @@ export class SignupComponent implements OnInit {
   invalidEmail = false;
   invalidPass = false;
   signupForm: FormGroup;
+  invalidSignupMessage: string;
 
   constructor(private formBuilder: FormBuilder, private auth: AuthService) { }
 
@@ -24,15 +25,20 @@ export class SignupComponent implements OnInit {
   }
 
   doSignup() {
+    this.invalidSignupMessage = null;
+    const email = this.signupForm.get('email');
+    this.invalidEmail = this.validity(email);
+    const pass = this.signupForm.get('password');
+    this.invalidPass = this.validity(pass);
     if (this.signupForm.invalid) {
       return;
     }
-    const email = this.signupForm.get('email');
-    const password = this.signupForm.get('password');
-    this.invalidEmail = email.invalid;
-    this.invalidPass = email.invalid;
-    const authData: AuthData = { email: email.value, password: password.value };
+    const authData: AuthData = { email: email.value, password: pass.value };
     this.auth.createUser(authData);
+  }
+
+  validity(control: AbstractControl) {
+    return control.invalid;
   }
 
 }

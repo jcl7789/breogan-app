@@ -5,6 +5,8 @@ import { NgbPopoverConfig, NgbPopover } from '@ng-bootstrap/ng-bootstrap';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductosService } from 'src/app/services/API/productos.service';
 import { ItemCarrito } from '../models/item-carrito.model';
+import { VentasService } from 'src/app/services/API/ventas.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -22,9 +24,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(
     private auth: AuthService,
-    private productsService: ProductosService,
+    private ps: ProductosService,
+    private vs: VentasService,
     private cd: ChangeDetectorRef,
-    private popConfig: NgbPopoverConfig
+    private popConfig: NgbPopoverConfig,
+    private router: Router
   ) {
     popConfig.placement = 'bottom-right';
     popConfig.autoClose = 'outside';
@@ -61,25 +65,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   quitarUnidad(__index: number) {
     this.carrito[__index].cantidad--;
     const filtered = this.carrito.filter((item) => item.cantidad > 0);
-    this.productsService.modificarCarrito(filtered);
+    this.ps.modificarCarrito(filtered);
     this.cargarCarrito();
   }
 
   cargarCarrito() {
-    this.carrito = this.productsService.estadoCarrito();
+    this.carrito = this.ps.estadoCarrito();
     this.recalcularTotal();
     this.cd.markForCheck();
   }
 
   agregarUnidad(__index: number) {
     this.carrito[__index].cantidad++;
-    this.productsService.modificarCarrito(this.carrito);
+    this.ps.modificarCarrito(this.carrito);
     this.cargarCarrito();
   }
 
   quitarElemento(__index: number) {
     const filtered = this.carrito.filter((item, index) => index !== __index);
-    this.productsService.modificarCarrito(filtered);
+    this.ps.modificarCarrito(filtered);
     this.cargarCarrito();
   }
 
@@ -93,5 +97,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     } catch (error) {
       this.total = 0;
     }
+  }
+
+  nuevaVenta() {
+    this.vs.efectuarVenta(this.carrito, 0, 'A');
+    this.popoverElement.close();
+    this.cargarCarrito();
+    this.router.navigate(['sales']);
   }
 }
